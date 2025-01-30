@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Knowledge - Double Entry System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+        #quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #quiz-container h2 {
+            margin-bottom: 20px;
+        }
+        .question {
+            margin: 15px 0;
+            display: none;
+        }
+        .question input {
+            margin-right: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            display: none;
+        }
+        #result p {
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            #quiz-container {
+                width: 100%;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2>Test Your Knowledge - You have 10 questions!</h2>
+
+    <button id="startQuizBtn">Start Quiz</button>
+
+    <div id="questions">
+        <div class="question">
+            <p>The Double Entry System is based on:</p>
+            <label><input type="radio" name="q1" value="a"> One debit and one credit entry</label><br>
+            <label><input type="radio" name="q1" value="b"> Two credits and one debit entry</label><br>
+            <label><input type="radio" name="q1" value="c"> One debit and two credit entries</label><br>
+        </div>
+
+        <div class="question">
+            <p>In the Double Entry System, for every debit entry, there must be:</p>
+            <label><input type="radio" name="q2" value="a"> A credit entry</label><br>
+            <label><input type="radio" name="q2" value="b"> A cash entry</label><br>
+            <label><input type="radio" name="q2" value="c"> A cash receipt</label><br>
+        </div>
+
+        <div class="question">
+            <p>Which of the following is an example of a debit entry in the Double Entry System?</p>
+            <label><input type="radio" name="q3" value="a"> Cash received from a customer</label><br>
+            <label><input type="radio" name="q3" value="b"> Sales on credit</label><br>
+            <label><input type="radio" name="q3" value="c"> Payment of wages</label><br>
+        </div>
+
+        <div class="question">
+            <p>What does the term "balance" in the Double Entry System refer to?</p>
+            <label><input type="radio" name="q4" value="a"> The difference between debits and credits</label><br>
+            <label><input type="radio" name="q4" value="b"> The amount of cash on hand</label><br>
+            <label><input type="radio" name="q4" value="c"> The amount owed by customers</label><br>
+        </div>
+
+        <div class="question">
+            <p>Which type of account is affected by both a debit and a credit entry in the Double Entry System?</p>
+            <label><input type="radio" name="q5" value="a"> Revenue accounts</label><br>
+            <label><input type="radio" name="q5" value="b"> Liability accounts</label><br>
+            <label><input type="radio" name="q5" value="c"> All accounts</label><br>
+        </div>
+
+        <div class="question">
+            <p>Which of the following is a rule for the Double Entry System?</p>
+            <label><input type="radio" name="q6" value="a"> Debit all income, Credit all expenses</label><br>
+            <label><input type="radio" name="q6" value="b"> Debit assets, Credit liabilities and equity</label><br>
+            <label><input type="radio" name="q6" value="c"> Debit liabilities, Credit assets</label><br>
+        </div>
+
+        <div class="question">
+            <p>The Double Entry System helps maintain:</p>
+            <label><input type="radio" name="q7" value="a"> A complete financial record</label><br>
+            <label><input type="radio" name="q7" value="b"> Only the bank account records</label><br>
+            <label><input type="radio" name="q7" value="c"> Only cash transactions</label><br>
+        </div>
+
+        <div class="question">
+            <p>Which account would be credited when a business purchases office equipment on credit?</p>
+            <label><input type="radio" name="q8" value="a"> Equipment account</label><br>
+            <label><input type="radio" name="q8" value="b"> Accounts payable account</label><br>
+            <label><input type="radio" name="q8" value="c"> Cash account</label><br>
+        </div>
+
+        <div class="question">
+            <p>The double-entry system ensures that:</p>
+            <label><input type="radio" name="q9" value="a"> All transactions are recorded in two places</label><br>
+            <label><input type="radio" name="q9" value="b"> Only the most important transactions are recorded</label><br>
+            <label><input type="radio" name="q9" value="c"> Transactions are recorded in one account</label><br>
+        </div>
+
+        <div class="question">
+            <p>What is the result of improper application of the double entry system?</p>
+            <label><input type="radio" name="q10" value="a"> Balanced books</label><br>
+            <label><input type="radio" name="q10" value="b"> Financial errors and discrepancies</label><br>
+            <label><input type="radio" name="q10" value="c"> Improved financial accuracy</label><br>
+        </div>
+
+        <button id="submitBtn" style="display:none;">Submit</button>
+        <button id="retakeQuizBtn" style="display:none;" onclick="retakeQuiz()">Retake Quiz</button>
+    </div>
+
+    <div id="result" style="display:none;">
+        <p id="score"></p>
+    </div>
+</div>
+
+<script>
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultDiv = document.getElementById('result');
+    const scoreText = document.getElementById('score');
+    const questions = document.querySelectorAll('.question');
+    const retakeQuizBtn = document.getElementById('retakeQuizBtn');
+
+    const correctAnswers = {
+        q1: 'a',
+        q2: 'a',
+        q3: 'c',
+        q4: 'a',
+        q5: 'c',
+        q6: 'b',
+        q7: 'a',
+        q8: 'b',
+        q9: 'a',
+        q10: 'b'
+    };
+
+    let score = 0;
+
+    startQuizBtn.addEventListener('click', () => {
+        startQuizBtn.style.display = 'none';
+        questions.forEach(question => question.style.display = 'block');
+        submitBtn.style.display = 'inline-block';
+    });
+
+    submitBtn.addEventListener('click', () => {
+        score = 0;
+        questions.forEach(question => {
+            const selectedAnswer = question.querySelector('input:checked');
+            const questionName = question.querySelector('input').name;
+            if (selectedAnswer && selectedAnswer.value === correctAnswers[questionName]) {
+                score++;
+            }
+        });
+        scoreText.textContent = `You got ${score} out of ${questions.length}`;
+        resultDiv.style.display = 'block';
+        submitBtn.style.display = 'none';
+        retakeQuizBtn.style.display = 'inline-block';
+    });
+
+    function retakeQuiz() {
+        score = 0;
+        resultDiv.style.display = 'none';
+        questions.forEach(question => {
+            question.style.display = 'none';
+            question.querySelectorAll('input').forEach(input => input.checked = false);
+        });
+        startQuizBtn.style.display = 'inline-block';
+        retakeQuizBtn.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
